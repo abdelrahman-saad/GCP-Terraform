@@ -1,0 +1,13 @@
+# ignore secrets directory
+
+secrets/
+
+# ignore terraform direcotry
+
+Terraform/.terraform/
+
+# ignore terraform state files
+
+Terraform/.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
