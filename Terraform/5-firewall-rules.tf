@@ -11,7 +11,7 @@ resource "google_compute_firewall" "deny-all" {
 resource "google_compute_firewall" "inbound-ip-ssh" {
     name        = "allow-incoming-ssh-from-iap"
     project     = var.project_id
-    network     = "application-vpc"
+    network     = google_compute_network.application-vpc.id
 
     direction = "INGRESS"
     allow {

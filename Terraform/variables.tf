@@ -1,6 +1,6 @@
 variable "project_id" {
   type           = string
-  default        = " gcp-terraform-as"
+  default        = "gcp-terraform-as"
 }
 
 variable "used_region_1" {
@@ -10,7 +10,7 @@ variable "used_region_1" {
 
 variable "used_region_2" {
   type           = string
-  default        = "us-east2"
+  default        = "us-central1"
 }
 
 variable "vpc_name" {
