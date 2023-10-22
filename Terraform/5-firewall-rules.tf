@@ -1,7 +1,7 @@
 resource "google_compute_firewall" "deny-all" {
   name    = "deny-all"
   network = google_compute_network.application-vpc.id
-
+  priority = 1001
   deny {
     protocol = "tcp"
   }

@@ -4,11 +4,11 @@ data "template_file" "startup_script" {
 }
 
 
-resource "google_compute_instance" "workload-instance" {
-  name         = "workload-vm"
+resource "google_compute_instance" "management-instance" {
+  name         = "management-vm"
   machine_type = "e2-medium"
-  tags         = ["workload-instance"]
-  zone         = "us-east1-a"
+  tags         = ["management-instance", "iap-instances"]
+  zone         = "us-east1-b"
 
   boot_disk {
     initialize_params {
@@ -17,7 +17,7 @@ resource "google_compute_instance" "workload-instance" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.workload_subnet.name
+    subnetwork = google_compute_subnetwork.management_subnet.name
   }
 
   metadata_startup_script = data.template_file.startup_script.rendered
