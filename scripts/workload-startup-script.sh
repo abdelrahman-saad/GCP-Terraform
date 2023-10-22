@@ -54,17 +54,18 @@ docker build -t node-app -f Dockerfile .
 
 cd /tmp
 
-wget --header="Metadata-Flavor: Google" -o key.json http://metadata.google.internal/computeMetadata/v1/instance/attributes/service-account-key
+wget --header="Metadata-Flavor: Google" -O key.json http://metadata.google.internal/computeMetadata/v1/instance/attributes/service-account-key
 
 #decrypt the key to its json format
-cat key.json | base64 -d > key1.json
+cat key.json | base64 -d > sa.json
 
 #Activate service account with key
 
-gcloud auth activate-service-account-key-file-keyl.json
+gcloud auth activate-service-account --key-file=sa.json
 
 #Authenticate to Docker
-gcloud auth configure-docker us-eastl-docker.pkg.dev -y
+echo "y" | gcloud auth configure-docker us-east1-docker.pkg.dev
+
 
 # Login
 cat key.json | docker login -u _json_key_base64 --password-stdin \
@@ -74,3 +75,9 @@ https://us-eastl-docker.pkg.dev
 sudo docker tag node-app "us-east1-docker.pkg.dev/gcp-terraform-as/gcp-terraform-as-repo/node-app:latest"
 
 sudo docker push "us-east1-docker.pkg.dev/gcp-terraform-as/gcp-terraform-as-repo/node-app:latest"
+
+sudo docker pull bitnami/mongodb:latest
+
+sudo docker tag bitnami/mongodb:latest "us-east1-docker.pkg.dev/gcp-terraform-as/gcp-terraform-as-repo/mongodb:latest"
+
+sudo docker push "us-east1-docker.pkg.dev/gcp-terraform-as/gcp-terraform-as-repo/mongodb:latest"
