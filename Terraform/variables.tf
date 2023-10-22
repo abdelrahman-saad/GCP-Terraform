@@ -27,3 +27,12 @@ variable "second_cider" {
   type           = string
   default        = "10.2.0.0/16"
 }
+
+variable "roles" {
+  type = list(string)
+  default =[
+  "roles/source.reader",
+  "roles/artifactregistry.writer",
+  "roles/container.clusterAdmin",
+]
+}

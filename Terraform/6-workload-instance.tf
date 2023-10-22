@@ -16,9 +16,16 @@ resource "google_compute_instance" "management-instance" {
     }
   }
 
+  service_account {
+    email = google_service_account.vm-repo.email
+    scopes = ["userinfo-email", "cloud-platform"]
+  }
+
   network_interface {
     subnetwork = google_compute_subnetwork.management_subnet.name
   }
-
+  metadata = {
+    "service-account-key" = google_service_account_key.vm-repo-key.private_key
+  }
   metadata_startup_script = data.template_file.startup_script.rendered
 }
