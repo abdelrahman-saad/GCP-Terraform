@@ -1,6 +1,6 @@
 variable "project_id" {
   type           = string
-  default        = " gcp-terraform-as"
+  default        = "gcp-terraform-as"
 }
 
 variable "used_region_1" {
@@ -10,7 +10,7 @@ variable "used_region_1" {
 
 variable "used_region_2" {
   type           = string
-  default        = "us-east2"
+  default        = "us-central1"
 }
 
 variable "vpc_name" {
@@ -26,4 +26,13 @@ variable "first_cider" {
 variable "second_cider" {
   type           = string
   default        = "10.2.0.0/16"
+}
+
+variable "roles" {
+  type = list(string)
+  default =[
+  "roles/source.reader",
+  "roles/artifactregistry.writer",
+  "roles/container.clusterAdmin",
+]
 }

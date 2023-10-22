@@ -1,7 +1,7 @@
 resource "google_compute_firewall" "deny-all" {
   name    = "deny-all"
   network = google_compute_network.application-vpc.id
-
+  priority = 1001
   deny {
     protocol = "tcp"
   }
@@ -11,7 +11,7 @@ resource "google_compute_firewall" "deny-all" {
 resource "google_compute_firewall" "inbound-ip-ssh" {
     name        = "allow-incoming-ssh-from-iap"
     project     = var.project_id
-    network     = "application-vpc"
+    network     = google_compute_network.application-vpc.id
 
     direction = "INGRESS"
     allow {
