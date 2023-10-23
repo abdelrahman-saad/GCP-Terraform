@@ -35,9 +35,9 @@ sudo docker tag moelshafei/nodeapp:latest "us-east1-docker.pkg.dev/gcp-terraform
 
 sudo docker push "us-east1-docker.pkg.dev/gcp-terraform-as/gcp-terraform-as-repo/node-app:latest"
 
-sudo docker pull bitnami/mongodb:latest
+sudo docker pull bitnami/mongodb:4.4.4
 
-sudo docker tag bitnami/mongodb:latest "us-east1-docker.pkg.dev/gcp-terraform-as/gcp-terraform-as-repo/mongodb:latest"
+sudo docker tag bitnami/mongodb:4.4.4 "us-east1-docker.pkg.dev/gcp-terraform-as/gcp-terraform-as-repo/mongodb:latest"
 
 sudo docker push "us-east1-docker.pkg.dev/gcp-terraform-as/gcp-terraform-as-repo/mongodb:latest"
 
