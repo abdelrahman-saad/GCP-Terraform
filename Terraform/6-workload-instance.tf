@@ -12,7 +12,7 @@ resource "google_compute_instance" "management-instance" {
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-2004-lts"
+      image = "debian-cloud/debian-10"
     }
   }
 
