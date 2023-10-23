@@ -7,9 +7,15 @@ resource "google_container_cluster" "workload_cluster" {
 
   private_cluster_config {
     enable_private_nodes = true
+    enable_private_endpoint = false
     master_ipv4_cidr_block = var.gke_cider
   }
-
+  master_authorized_networks_config {
+      cidr_blocks {
+          cidr_block = var.first_cider
+          display_name = "vm"
+      }
+    }
 
   deletion_protection = false
 

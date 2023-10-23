@@ -39,5 +39,6 @@ variable "roles" {
   "roles/source.reader",
   "roles/artifactregistry.writer",
   "roles/container.clusterAdmin",
+  "roles/container.admin"
 ]
 }
