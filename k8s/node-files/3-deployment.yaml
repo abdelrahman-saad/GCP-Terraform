@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-dep
+  namespace: node-ns
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-dep
+  template:
+    metadata:
+      labels:
+        app: node-dep
+    spec:
+      containers:
+      - name: node-dep
+        image: us-east1-docker.pkg.dev/gcp-terraform-as/gcp-terraform-as-repo/node-app
+        ports:
+        - name: http
+          containerPort: 5000
+        env:
+        - name: MONGODB_HOSTNAME
+          value: mongodb-0.mongodb-headless.database
+        - name: MONGODB_PORT
+          value: "27017"
+        - name: MONGODB_DATABASE
+          value: inventory
+        - name: MONGODB_USERNAME
+          value: test
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: creds
+              key: db-password
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
