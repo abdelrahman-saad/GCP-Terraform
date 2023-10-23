@@ -4,7 +4,9 @@ metadata:
   name: mongodb-headless
   namespace: database
 spec:
-  type: LoadBalancer
+  type: ClusterIP
+  clusterIP: None
+  publishNotReadyAddresses: true
   ports:
   - name: mongodb
     port: 27017
