@@ -81,3 +81,25 @@ sudo docker pull bitnami/mongodb:latest
 sudo docker tag bitnami/mongodb:latest "us-east1-docker.pkg.dev/gcp-terraform-as/gcp-terraform-as-repo/mongodb:latest"
 
 sudo docker push "us-east1-docker.pkg.dev/gcp-terraform-as/gcp-terraform-as-repo/mongodb:latest"
+
+# Deploy the proxy 
+sudo apt install tinyproxy -y
+
+# Open the Tinyproxy configuration file with sudo and append 'Allow localhost' to it
+sudo sh -c "echo 'Allow localhost' >> /etc/tinyproxy/tinyproxy.conf"
+
+# Restart tinyproxy
+sudo service tinyproxy restart
+
+# Install the kubernetes commandline client
+sudo apt update
+
+sudo apt-get install kubectl 
+sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin 
+
+export KUBECONFIG=$HOME/.kube/config
+# Get cluster credentials and set kubectl to use internal ip
+gcloud container clusters get-credentials workload-cluster --zone us-central1 --project gcp-terraform-as --internal-ip
+
+# Enabling control plane private endpoint global access
+gcloud container clusters update workload-cluster --zone us-central1 --enable-master-global-access
