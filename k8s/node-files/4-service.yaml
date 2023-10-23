@@ -4,7 +4,7 @@ metadata:
   name: node
   namespace: node-ns
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
   - name: api
     port: 80
